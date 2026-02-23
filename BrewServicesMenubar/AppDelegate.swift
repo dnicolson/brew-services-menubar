@@ -175,7 +175,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             let launchPath = try self.brewExecutable()
 
-            updateMenu(refreshing: true)
+            DispatchQueue.main.async {
+                self.updateMenu(refreshing: true)
+            }
+
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
                     let result = try self.serviceStates(launchPath: launchPath)
